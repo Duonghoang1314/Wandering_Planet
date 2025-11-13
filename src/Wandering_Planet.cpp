@@ -94,9 +94,11 @@ void followLine(){
   leftSpeed = constrain(leftSpeed, minSpeed, maxSpeed);
   rightSpeed = constrain(rightSpeed, minSpeed, maxSpeed);
 
-  int leftPWM = map(leftSpeed, 0, 100, 0, 255);
-  int rightPWM = map(rightSpeed, 0, 100, 0, 255);
+  digitalWrite(leftMotorDIR, HIGH);
+  digitalWrite(rightMotorDIR, HIGH);
 
+  int leftPWM = map(abs(leftSpeed), 0, 100, 0, 255);
+  int rightPWM = map(abs(rightSpeed), 0, 100, 0, 255);
   SoftPWMSet(leftMotorPWM, leftPWM);
   SoftPWMSet(rightMotorPWM, rightPWM);
 }

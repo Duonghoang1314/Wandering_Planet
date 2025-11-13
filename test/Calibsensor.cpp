@@ -28,6 +28,7 @@ void loop() {
     while (!Serial); // Wait for Serial connection
     static bool lastButtonState = HIGH;
     bool currentButtonState = digitalRead(buttonPin);
+    delay(1000);
 
     // Detect button press
     if (lastButtonState == HIGH && currentButtonState == LOW) {

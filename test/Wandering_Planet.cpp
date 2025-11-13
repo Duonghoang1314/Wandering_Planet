@@ -62,14 +62,14 @@ void readSensors(){
 
 void moveMotor(int leftSpeed, int rightSpeed, int duration){
   // --- This is the motor move function ---
-  // How to usethe function:
+  // How to use the function:
   // moveMotor(speed, speed, time);
 
-  bool leftFoward = leftSpeed > 0;
-  bool rightFoward = rightSpeed > 0;
+  bool leftForward = leftSpeed > 0;
+  bool rightForward = rightSpeed > 0;
 
-  digitalWrite(leftMotorDIR, leftFoward ? HIGH : LOW);
-  digitalWrite(rightMotorDIR, rightFoward ? HIGH : LOW);
+  digitalWrite(leftMotorDIR, leftForward ? HIGH : LOW);
+  digitalWrite(rightMotorDIR, rightForward ? HIGH : LOW);
 
   int leftPWM = map(abs(leftSpeed), 0, 100, 0, 255);
   int rightPWM = map(abs(rightSpeed), 0, 100, 0, 255);
@@ -82,25 +82,6 @@ void moveMotor(int leftSpeed, int rightSpeed, int duration){
 
   SoftPWMSet(leftMotorPWM, 0);
   SoftPWMSet(rightMotorPWM, 0);
-}
-
-void followLine(){
-  int error = calculateError();
-  float correction = computePID(error);
-
-  float leftSpeed = baseSpeed - correction;
-  float rightSpeed = baseSpeed + correction;
-
-  leftSpeed = constrain(leftSpeed, minSpeed, maxSpeed);
-  rightSpeed = constrain(rightSpeed, minSpeed, maxSpeed);
-
-  digitalWrite(leftMotorDIR, HIGH);
-  digitalWrite(rightMotorDIR, HIGH);
-
-  int leftPWM = map(abs(leftSpeed), 0, 100, 0, 255);
-  int rightPWM = map(abs(rightSpeed), 0, 100, 0, 255);
-  SoftPWMSet(leftMotorPWM, leftPWM);
-  SoftPWMSet(rightMotorPWM, rightPWM);
 }
 
 void Trace_to_Cross_T_Junction(){
@@ -133,9 +114,11 @@ void Trace_to_Left_Junction(){
 void turnLeft(){
   readSensors();
   while(!s1){
+    readSensors();
     moveMotor(-80, 60, 10);
   }
   while(!s2){
+    readSensors();
     moveMotor(-80, 60, 10);
   }
 }
@@ -143,42 +126,15 @@ void turnLeft(){
 void turnRight(){
   readSensors();
   while(!s1){
+    readSensors();
     moveMotor(80, -60, 10);
   }
   while(!s2){
+    readSensors();
     moveMotor(80, -60, 10);
   }
 }
 
-int calculateError() {
-  int weight[4] = {-3, -1, 1, 3}; // weighted sensor positions
-  int sum = 0;
-  int active = 0;
-
-  for (int i = 0; i < 4; i++) {
-    int state = sensor[i] < threshold[i] ? 1 : 0;  // 1 = line detected (black)
-    sum += weight[i] * state;
-    active += state;
-  }
-
-  if (active == 0) return lastError;  // No line detected — use last error
-
-  int error = sum / active;
-  return error;
-}
-
-float computePID(int error) {
-  unsigned long now = millis();
-  float dt = (now - lastTime) / 1000.0;
-  lastTime = now;
-
-  integral += error * dt;
-  float derivative = (error - lastError) / dt;
-  float output = Kp * error + Ki * integral + Kd * derivative;
-
-  lastError = error;
-  return output;
-}
 void setLinetrackingBaseSpeed(int setBaseSpeed, int setMinSpeed, int setMaxSpeed){
   baseSpeed = setBaseSpeed;
   minSpeed = setMinSpeed;

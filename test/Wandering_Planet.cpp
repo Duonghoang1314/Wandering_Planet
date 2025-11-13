@@ -107,7 +107,7 @@ void Trace_to_Cross_T_Junction(){
   readSensors();
   while(true){
     readSensors();
-    if (!s1 && !s4) break;
+    if (s1 && s4) break;
     followLine();
   }
 }
@@ -116,7 +116,7 @@ void Trace_to_Right_Junction(){
   readSensors();
   while(true){
     readSensors();
-    if (!s4) break;
+    if (s4) break;
     followLine();
   }
 }
@@ -125,7 +125,7 @@ void Trace_to_Left_Junction(){
   readSensors();
   while(true){
     readSensors();
-    if (!s1) break;
+    if (s1) break;
     followLine();
   }
 }

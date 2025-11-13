@@ -25,9 +25,9 @@ float Kp = 25.0;    // Proportional gain
 float Ki = 0.0;     // Integral gain
 float Kd = 8.0;     // Derivative gain
 
-int baseSpeed = 60;
-int maxSpeed = 80;
-int minSpeed = 40;
+int baseSpeed = 30;
+int maxSpeed = 50;
+int minSpeed = 10;
 
 int counter = 0;
 //Store the sensor readings

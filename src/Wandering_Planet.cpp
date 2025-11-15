@@ -29,10 +29,10 @@ void setup() {
 
   // --- Function ---
   moveMotor(60, 60, 300);
-  Trace_to_Cross_T_Junction();
+  Trace_to_Right_Junction();
   moveMotor(60, 60, 200);
-  Trace_to_Cross_T_Junction();
-  moveMotor(80, 60, 200);
+  Trace_to_Right_Junction();
+  moveMotor(60, 60, 500);
   turnRight();
   // Trace_to_Cross_T_Junction():
   // moveMotor(80, 60, 300);
@@ -48,7 +48,7 @@ void setup() {
   // turnRight();
   // setLinetrackingBaseSpeed(50, 30, 60);
   // Trace_to_Cross_T_Junction();
-  // moveMotor(0, 0, 0);
+  moveMotor(0, 0, 0);
 }
 
 void loop() {}
@@ -78,8 +78,8 @@ void moveMotor(int leftSpeed, int rightSpeed, int duration){
   digitalWrite(leftMotorDIR, leftForward ? HIGH : LOW);
   digitalWrite(rightMotorDIR, rightForward ? HIGH : LOW);
 
-  uint8_t leftPWM = map(abs(leftSpeed), 0, 100, 0, 255);
-  uint8_t rightPWM = map(abs(rightSpeed), 0, 100, 0, 255);
+  int leftPWM = map(abs(leftSpeed), 0, 100, 0, 255);
+  int rightPWM = map(abs(rightSpeed), 0, 100, 0, 255);
 
   SoftPWMSet(leftMotorPWM, leftPWM);
   SoftPWMSet(rightMotorPWM, rightPWM);
@@ -128,23 +128,23 @@ void turnLeft(){
   readSensors();
   while(!s1){
     readSensors();
-    moveMotor(-80, 60, 10);
+    moveMotor(80, -60, 10);
   }
   while(!s2){
     readSensors();
-    moveMotor(-80, 60, 10);
+    moveMotor(80, -60, 10);
   }
 }
 // Turn right function
 void turnRight(){
   readSensors();
-  while(!s1){
+  while(!s4){
     readSensors();
-    moveMotor(80, -60, 10);
+    moveMotor(-60, 80, 10);
   }
-  while(!s2){
+  while(!s3){
     readSensors();
-    moveMotor(80, -60, 10);
+    moveMotor(-60, 80, 10);
   }
 }
 

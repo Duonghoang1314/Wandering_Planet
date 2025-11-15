@@ -13,10 +13,10 @@
 #define rightMotorDIR 1 // Left Motor
 
 // Variables
-int thresholdS1 = 381;
-int thresholdS2 = 576;
-int thresholdS3 = 626;
-int thresholdS4 = 372;
+int thresholdS1 = 398;
+int thresholdS2 = 652;
+int thresholdS3 = 526;
+int thresholdS4 = 395;
 
 //Store the threshold value
 int threshold[4] = {thresholdS1, thresholdS2, thresholdS3, thresholdS4};

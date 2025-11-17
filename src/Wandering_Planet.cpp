@@ -26,16 +26,15 @@ void setup() {
   Serial.begin(9600);
   while (digitalRead(13) == LOW){}
   
-
   // --- Function ---
-  moveMotor(60, 60, 300);
+  moveMotor(30, 25, 300);
   Trace_to_Right_Junction();
-  moveMotor(60, 60, 200);
+  moveMotor(30, 25, 300);
   Trace_to_Right_Junction();
-  moveMotor(60, 60, 500);
+  moveMotor(40, 33, 50);
   turnRight();
-  // Trace_to_Cross_T_Junction():
-  // moveMotor(80, 60, 300);
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 37, 450);
   // turnLeft();
   // Trace_To_Left_Junction();
   // moveMotor(80, 60, 200);
@@ -140,11 +139,11 @@ void turnRight(){
   readSensors();
   while(!s4){
     readSensors();
-    moveMotor(-60, 80, 10);
+    moveMotor(-100, 80, 10);
   }
   while(!s3){
     readSensors();
-    moveMotor(-60, 80, 10);
+    moveMotor(-100, 80, 10);
   }
 }
 

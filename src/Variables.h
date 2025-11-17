@@ -13,20 +13,20 @@
 #define rightMotorDIR 1 // Left Motor
 
 // Variables
-int thresholdS1 = 398;
-int thresholdS2 = 652;
-int thresholdS3 = 526;
-int thresholdS4 = 395;
+int thresholdS1 = 405;
+int thresholdS2 = 568;
+int thresholdS3 = 596;
+int thresholdS4 = 389;
 
 //Store the threshold value
 int threshold[4] = {thresholdS1, thresholdS2, thresholdS3, thresholdS4};
 
-float Kp = 25.0;    // Proportional gain
+float Kp = 15.0;    // Proportional gain
 float Ki = 0.0;     // Integral gain
 float Kd = 8.0;     // Derivative gain
 
-int baseSpeed = 30;
-int maxSpeed = 50;
+int baseSpeed = 25;
+int maxSpeed = 40;
 int minSpeed = 10;
 
 int counter = 0;

@@ -13,10 +13,10 @@
 #define rightMotorDIR 1 // Left Motor
 
 // Variables
-int thresholdS1 = 405;
-int thresholdS2 = 568;
-int thresholdS3 = 596;
-int thresholdS4 = 389;
+int thresholdS1 = 401;
+int thresholdS2 = 636;
+int thresholdS3 = 538;
+int thresholdS4 = 420;
 
 //Store the threshold value
 int threshold[4] = {thresholdS1, thresholdS2, thresholdS3, thresholdS4};
@@ -38,3 +38,5 @@ int position = 0;
 int lastError = 0;
 float integral = 0;
 unsigned long lastTime = 0;
+
+int turnSpeed = 30;

@@ -12,7 +12,6 @@ void setup() {
   pinMode(S4, INPUT);
 
   pinMode(13, INPUT_PULLUP);
-
   pinMode(leftMotorDIR, OUTPUT);
   pinMode(rightMotorDIR, OUTPUT);
 
@@ -22,31 +21,31 @@ void setup() {
   SoftPWMSetFadeTime(leftMotorPWM, 0, 0);
   SoftPWMSetFadeTime(rightMotorPWM, 0, 0);
 
-  // Initialize serial for debugging
   Serial.begin(9600);
-  while (digitalRead(13) == LOW){}
+  // Wait for pressing the button to start
+  while (digitalRead(13) == HIGH){}
   
   // --- Function ---
+  moveMotor(30, 25, 400);
+  Trace_to_Cross_T_Junction();
   moveMotor(30, 25, 300);
-  Trace_to_Right_Junction();
-  moveMotor(30, 25, 300);
-  Trace_to_Right_Junction();
-  moveMotor(40, 33, 50);
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
   turnRight();
   Trace_to_Cross_T_Junction();
-  moveMotor(40, 37, 450);
-  // turnLeft();
-  // Trace_To_Left_Junction();
-  // moveMotor(80, 60, 200);
-  // turnLeft();
-  // Trace_to_Right_Junction();
-  // moveMotor(80, 60, 200);
-  // turnRight();
-  // Trace_to_Cross_T_Junction();
-  // moveMotor(80, 60, 200);
-  // turnRight();
-  // setLinetrackingBaseSpeed(50, 30, 60);
-  // Trace_to_Cross_T_Junction();
+  moveMotor(40, 37, 100);
+  turnLeft();
+  Trace_to_Left_Junction();
+  moveMotor(40, 33, 100);
+  turnLeft();
+  Trace_to_Right_Junction();
+  moveMotor(40, 33, 100);
+  turnRight();
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  Trace_to_Cross_T_Junction();
+  moveMotor(30, 25, 200);
+  EnergyDetection();
   moveMotor(0, 0, 0);
 }
 
@@ -127,11 +126,11 @@ void turnLeft(){
   readSensors();
   while(!s1){
     readSensors();
-    moveMotor(80, -60, 10);
+    moveMotor(turnSpeed + 20, -turnSpeed, 10);
   }
   while(!s2){
     readSensors();
-    moveMotor(80, -60, 10);
+    moveMotor(turnSpeed + 20, -turnSpeed, 10);
   }
 }
 // Turn right function
@@ -139,23 +138,15 @@ void turnRight(){
   readSensors();
   while(!s4){
     readSensors();
-    moveMotor(-100, 80, 10);
+    moveMotor(-20 - turnSpeed, turnSpeed, 10);
   }
   while(!s3){
     readSensors();
-    moveMotor(-100, 80, 10);
+    moveMotor(-20 - turnSpeed, turnSpeed, 10);
   }
 }
 
 void EnergyDetection(){
-  delay(500);
-  moveMotor(-25, 20, 100);
-  delay(1000);
-  //Servo Motor
-  delay(1450);
-  //Servo Motor
-  delay(500);
-  turnLeft();
 }
 
 // --- Line tracking function with PID control ---
@@ -181,7 +172,7 @@ void followLine(){
   SoftPWMSet(leftMotorPWM, leftPWM);
   SoftPWMSet(rightMotorPWM, rightPWM);
 }
-// --- Control Logic ---
+// --- PID Control Logic ---
 int calculateError() {
   if (s2 && !s3) return 1;     // line is left
   if (!s2 && s3) return -1;     // line is right

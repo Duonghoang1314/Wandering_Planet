@@ -29,23 +29,115 @@ void setup() {
   moveMotor(30, 25, 400);
   Trace_to_Cross_T_Junction();
   moveMotor(30, 25, 300);
+
   Trace_to_Cross_T_Junction();
   moveMotor(40, 33, 100);
   turnRight();
+
   Trace_to_Cross_T_Junction();
   moveMotor(40, 37, 100);
   turnLeft();
+
   Trace_to_Left_Junction();
   moveMotor(40, 33, 100);
   turnLeft();
+
   Trace_to_Right_Junction();
   moveMotor(40, 33, 100);
   turnRight();
+
   Trace_to_Cross_T_Junction();
   moveMotor(40, 33, 100);
+  turnRight();
+
+  // --- Mission 1 ---
   Trace_to_Cross_T_Junction();
-  moveMotor(30, 25, 200);
-  EnergyDetection();
+  moveMotor(-40, -33, 300);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  
+  // --- Mission 2 ---
+  Trace_to_Cross_T_Junction();
+  moveMotor(-40, -33, 300);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnLeft();
+
+  // --- Mission 3 ---
+  Trace_to_Cross_T_Junction();
+  moveMotor(-40, -33, 300);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnRight();
+
+  Trace_to_Left_Junction();
+  moveMotor(40, 33, 100);
+  turnLeft();
+
+  // --- Mission 4 ---
+  Trace_to_Left_Junction();
+  moveMotor(40, 33, 100);
+  turnRight();
+  turnRight();
+
+  Trace_to_Right_Junction();
+  moveMotor(40, 33, 100);
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnLeft();
+
+  // --- Mission 5 ---
+  Trace_to_Cross_T_Junction();
+  moveMotor(-40, -37, 300);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+
+  Trace_to_Right_Junction();
+  moveMotor(40, 33, 100);
+
+  // --- Mission 6 ---
+  Trace_to_Cross_T_Junction();
+  moveMotor(-40, -37, 300);
+  turnLeft();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnLeft();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnRight();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 100);
+  turnLeft();
+
+  Trace_to_Cross_T_Junction();
+  moveMotor(40, 33, 200);
   moveMotor(0, 0, 0);
 }
 
@@ -130,7 +222,7 @@ void turnLeft(){
   }
   while(!s2){
     readSensors();
-    moveMotor(turnSpeed + 20, -turnSpeed, 10);
+    moveMotor(turnSpeed, -turnSpeed, 10);
   }
 }
 // Turn right function
@@ -142,7 +234,7 @@ void turnRight(){
   }
   while(!s3){
     readSensors();
-    moveMotor(-20 - turnSpeed, turnSpeed, 10);
+    moveMotor(- turnSpeed, turnSpeed, 10);
   }
 }
 

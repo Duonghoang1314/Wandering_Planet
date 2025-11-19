@@ -23,9 +23,7 @@ void setup() {
   SoftPWMSetFadeTime(leftMotorPWM, 0, 0);
   SoftPWMSetFadeTime(rightMotorPWM, 0, 0);
 
-  // Initialize serial for debugging
-  Serial.begin(9600);
-
+  
   // --- Function ---
   Trace_to_Cross_T_Junction();
 }

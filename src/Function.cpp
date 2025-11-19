@@ -3,12 +3,47 @@
 #include "Variables.h"
 #include "Function.h"
 
+// Fast ADC read using registers (AVR)
+#include <avr/io.h>
+
+static inline int fastAnalogRead(uint8_t pin) {
+  // Map Arduino analog pin to ADC channel using core macro
+#if defined(analogInputToChannel)
+  uint8_t channel = analogInputToChannel(pin);
+#else
+  // fallback: assume pin value already corresponds to channel
+  uint8_t channel = pin;
+#endif
+
+  // Save ADMUX and ADCSRA states if needed (we'll reconfigure ADMUX)
+  uint8_t oldADMUX = ADMUX;
+
+  // Clear MUX bits then set channel (lower 4 bits)
+  ADMUX = (ADMUX & 0xF0) | (channel & 0x0F);
+#if defined(ADCSRB)
+  if (channel & 0x10) ADCSRB |= _BV(MUX5);
+  else ADCSRB &= ~_BV(MUX5);
+#endif
+
+  // Start conversion
+  ADCSRA |= _BV(ADSC);
+  // Wait for conversion to finish
+  while (ADCSRA & _BV(ADSC));
+
+  int value = ADC; // ADC is ADCW
+
+  // Restore ADMUX (optional)
+  ADMUX = oldADMUX;
+  return value;
+}
+
 // --- Read the sensor then convert to bool value ---
 void readSensors(){
-  sensor[0] = analogRead(S1);
-  sensor[1] = analogRead(S2);
-  sensor[2] = analogRead(S3);
-  sensor[3] = analogRead(S4);
+  // Use fast ADC reads
+  sensor[0] = fastAnalogRead(S1);
+  sensor[1] = fastAnalogRead(S2);
+  sensor[2] = fastAnalogRead(S3);
+  sensor[3] = fastAnalogRead(S4);
 
   s1 = (sensor[0] < thresholdS1);
   s2 = (sensor[1] < thresholdS2);

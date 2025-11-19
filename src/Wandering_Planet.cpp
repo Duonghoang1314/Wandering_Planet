@@ -13,8 +13,9 @@ void setup() {
 
   pinMode(13, INPUT_PULLUP);
 
-  pinMode(leftMotorDIR, OUTPUT);
-  pinMode(rightMotorDIR, OUTPUT);
+  // Set motor direction pins as outputs using fast macros
+  FAST_PIN_MODE_OUTPUT(leftMotorDIR);
+  FAST_PIN_MODE_OUTPUT(rightMotorDIR);
 
   SoftPWMBegin();
   SoftPWMSet(leftMotorPWM, 0);

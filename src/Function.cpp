@@ -14,21 +14,14 @@ void readSensors(){
   s2 = (sensor[1] < thresholdS2);
   s3 = (sensor[2] < thresholdS3);
   s4 = (sensor[3] < thresholdS4);
-
-  // Print all sensor readings on one line to avoid flooding serial
-  for (size_t i = 0; i < 4; i++) {
-    Serial.print(sensor[i]);
-    if (i < 3) Serial.print(" ");
-  }
-  Serial.println();
 }
 
 void moveMotor(int leftSpeed, int rightSpeed, int duration){
   bool leftForward = leftSpeed > 0;
   bool rightForward = rightSpeed > 0;
 
-  digitalWrite(leftMotorDIR, leftForward ? HIGH : LOW);
-  digitalWrite(rightMotorDIR, rightForward ? HIGH : LOW);
+  FAST_PIN_WRITE(leftMotorDIR, leftForward ? HIGH : LOW);
+  FAST_PIN_WRITE(rightMotorDIR, rightForward ? HIGH : LOW);
 
   uint8_t leftPWM = map(abs(leftSpeed), 0, 100, 0, 255);
   uint8_t rightPWM = map(abs(rightSpeed), 0, 100, 0, 255);
@@ -132,8 +125,8 @@ void followLine(){
   bool leftForward = leftSpeed > 0;
   bool rightForward = rightSpeed > 0;
 
-  digitalWrite(leftMotorDIR, leftForward ? HIGH : LOW);
-  digitalWrite(rightMotorDIR, rightForward ? HIGH : LOW);
+  FAST_PIN_WRITE(leftMotorDIR, leftForward ? HIGH : LOW);
+  FAST_PIN_WRITE(rightMotorDIR, rightForward ? HIGH : LOW);
 
   uint8_t leftPWM = map((int)abs(leftSpeed), 0, 100, 0, 255);
   uint8_t rightPWM = map((int)abs(rightSpeed), 0, 100, 0, 255);

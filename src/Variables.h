@@ -14,6 +14,24 @@
 #define rightMotorPWM 6 // Left Motor
 #define rightMotorDIR 1 // Left Motor
 
+// Fast I/O macros (use Arduino core helpers for portability)
+// These use direct port registers for much faster digital writes/reads than digitalWrite
+// Usage: FAST_PIN_MODE_OUTPUT(pin); FAST_PIN_WRITE(pin, HIGH/LOW); FAST_PIN_READ(pin)
+#include <Arduino.h>
+#define __PIN_PORT(pin) (digitalPinToPort(pin))
+#define __PIN_BM(pin) (digitalPinToBitMask(pin))
+#define __PIN_OUTREG(pin) (portOutputRegister(digitalPinToPort(pin)))
+#define __PIN_DIRREG(pin) (portModeRegister(digitalPinToPort(pin)))
+#define __PIN_INREG(pin) (portInputRegister(digitalPinToPort(pin)))
+
+#define FAST_PIN_MODE_OUTPUT(pin) ((*__PIN_DIRREG(pin)) |= __PIN_BM(pin))
+#define FAST_PIN_MODE_INPUT(pin)  ((*__PIN_DIRREG(pin)) &= ~__PIN_BM(pin))
+#define FAST_PIN_WRITE(pin, val) do { \
+	if (val) (*__PIN_OUTREG(pin)) |= __PIN_BM(pin); \
+	else (*__PIN_OUTREG(pin)) &= ~__PIN_BM(pin); \
+} while (0)
+#define FAST_PIN_READ(pin) (((*__PIN_INREG(pin)) & __PIN_BM(pin)) ? HIGH : LOW)
+
 // Variables (declare only)
 extern int thresholdS1;
 extern int thresholdS2;

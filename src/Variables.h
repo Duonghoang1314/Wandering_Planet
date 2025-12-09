@@ -9,13 +9,17 @@
 #define rightMotorPWM 6 // Left Motor
 #define rightMotorDIR 1 // Left Motor
 
-// Threshold values for line tracking sensors in white side
+// Threshold values for line tracking sensors in green side
+// Bên xanh lá
+// Đo màu đen và màu xanh lá
 int thresholdS1 = 680;
 int thresholdS2 = 743;
 int thresholdS3 = 575;
 int thresholdS4 = 575;
 
-// Threshold values for line tracking sensors in black side
+// Threshold values for line tracking sensors in red side
+// Bên đỏ
+// Đo màu trắng và màu đỏ
 int thresholdS1B = 783;
 int thresholdS2B = 835;
 int thresholdS3B = 647;
@@ -32,7 +36,6 @@ int baseSpeed = 25;
 int maxSpeed = 40;
 int minSpeed = 10;
 
-int counter = 0;
 //Store the sensor readings
 int sensor[4];
 bool s1, s2, s3, s4;
@@ -41,5 +44,3 @@ int position = 0;
 int lastError = 0;
 float integral = 0;
 unsigned long lastTime = 0;
-
-int turnSpeed = 40;

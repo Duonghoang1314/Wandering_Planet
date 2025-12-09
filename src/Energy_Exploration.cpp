@@ -39,37 +39,41 @@ void setup() {
   moveMotor(30, 25, 200);
   turnLeft_B();
 
-
-    Trace_to_Left_Junction_B();
-    moveMotor(30, 25, 500);
-    turnLeft_B();
+  Trace_to_Left_Junction_B();
+  moveMotor(30, 25, 500);
+  turnLeft_B();
     
+  Trace_to_Left_Junction_B();
+  moveMotor(30, 25, 200);
 
+  Trace_to_Left_Junction_B();
+  moveMotor(30, 25, 200);
+  turnLeft_B();
+
+  Trace_to_Cross_T_Junction_B();
+  moveMotor(30, 25, 200);
+  turnLeft_B();
+
+  Trace_to_Right_Junction_B();
+  moveMotor(30, 25, 400);
+  turnRight_B();
+
+  Trace_to_Right_Junction_B();
+  moveMotor(30, 25, 200);
+  turnRight_B();
+
+  Trace_to_Cross_T_Junction_B();
+  moveMotor(30, 25, 150);
+  delay(1000);
+
+  moveMotor(-30, -25, 1000);
+  turnLeft_B();
+
+  Trace_to_Left_Junction_B();
+  moveMotor(30, 25, 300);
+  turnLeft_B();
   
-    
-    Trace_to_Left_Junction_B();
-    moveMotor(30, 25, 200);
-    Trace_to_Left_Junction_B();
-    moveMotor(30, 25, 200);
-    turnLeft_B();
-    Trace_to_Cross_T_Junction_B();
-    moveMotor(30, 25, 200);
-    turnLeft_B();
-    Trace_to_Right_Junction_B();
-    moveMotor(30, 25, 400);
-    turnRight_B();
-    Trace_to_Right_Junction_B();
-    moveMotor(30, 25, 200);
-    turnRight_B();
-    Trace_to_Cross_T_Junction_B();
-    moveMotor(30, 25, 150);
-    delay(1000);
-    moveMotor(-30, -25, 1000);
-    turnLeft_B();
-    Trace_to_Left_Junction_B();
-    moveMotor(30, 25, 300);
-    turnLeft_B();
-    Trace_to_Cross_T_Junction_B();
+  Trace_to_Cross_T_Junction_B();
 
   // Về vị trí 1
   // moveMotor(30, 25, 200); 
@@ -89,17 +93,13 @@ void setup() {
   Trace_to_Cross_T_Junction();
   moveMotor(30, 25, 900);
 
-    // Về vị tri 3
-    // moveMotor(30, 25, 200);
-    // Trace_to_Right_Junction();
-    // moveMotor(30, 25, 200);
-    // Trace_to_Right_Junction();
-    // moveMotor(30, 25, 200);
-    // Trace_to_Left_Junction();
-    // moveMotor(30, 25, 200);
-    // turnLeft();
-    // Trace_to_Cross_T_Junction();
-    // moveMotor(30, 25, 900); 
+  // Về vị tri 3
+  // moveMotor(30, 25, 200);
+  // Trace_to_Left_Junction();
+  // moveMotor(30, 25, 200);
+  // turnLeft();
+  // Trace_to_Cross_T_Junction();
+  // moveMotor(30, 25, 900); 
 }  
 
 void loop() {}
@@ -190,7 +190,7 @@ void turnLeft(){
   }
   while(!s2){
     readSensors();
-    moveMotor(50, -30, 10);
+    moveMotor(40, -25, 10);
   }
 }
 // Turn right function
@@ -202,7 +202,7 @@ void turnRight(){
   }
   while(!s3){
     readSensors();
-    moveMotor(-50, 30, 10);
+    moveMotor(-40, 25, 10);
   }
 }
 // --- Line tracking function with PID control ---
@@ -305,7 +305,7 @@ void turnLeft_B(){
   }
   while(!s2){
     readSensors_B();
-    moveMotor(50, -30, 10);
+    moveMotor(40, -25, 10);
   }
 }
 // Turn right function
@@ -317,6 +317,6 @@ void turnRight_B(){
   }
   while(!s3){
     readSensors_B();
-    moveMotor(-50, 30, 10);
+    moveMotor(-40, 25, 10);
   }
 }
